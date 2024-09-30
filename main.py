@@ -10,12 +10,10 @@ names_meanings = {
     "Александра": "Имя Александра в переводе с греческого означает «мужественная», «защитница». Парное мужское имя – Александр. В русском, украинском и белорусском языках это имя имеет различные формы: Лександра, Ляксандра, Олекса, Алекса, Алеся, Олеся, Леся."
 }
 
-# @bot.message_handler(content_types=['text'])
-# def welcome_message(message):
-#     # Если написали «Привет»
-#     if message.text == "Привет":
-#         # Пишем приветствие
-#         bot.send_message(message.from_user.id, "Привет, сейчас я расскажу тебе кто ты по масти.")
+@bot.message_handler(content_types=['text'], func=lambda message: "привет" in message.text.lower())
+def welcome_message(message):
+    # Пишем приветствие
+    bot.send_message(message.from_user.id, "Привет, сейчас я расскажу тебе, кто ты по масти.\nДля этого набери команду /start")
 
 @bot.message_handler(commands=['start', 'help'])
 def create_buttons(message):
