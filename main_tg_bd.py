@@ -1,13 +1,14 @@
 import sqlite3
 import telebot
 from telebot import types
+import constants
 
 # Создание экземпляра бота с токеном (замени на свой токен)
-TOKEN = '7508422440:AAHTcxW-T0hSYTYAIsapPhnrHrdivy_6c-8'
+TOKEN = constants.TG_API_TOKEN
 bot = telebot.TeleBot(TOKEN)
 
 # Логин администратора
-ADMIN_LOGIN = 'RaslSMR'
+ADMIN_LOGIN = constants.ADMIN_LOGIN
 
 # Функция для подключения к базе данных
 def connect_db():
@@ -20,7 +21,11 @@ def send_welcome(message):
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
     about_btn = types.KeyboardButton("О боте")
     name_meaning_btn = types.KeyboardButton("Узнать значение имени")
-    markup.add(about_btn, name_meaning_btn)
+
+    web_app = types.WebAppInfo(url="https://1nferno0.github.io/MeaningsOfNamesChatBot/")
+    web_app_btn = types.KeyboardButton(text="Значение", web_app=web_app)
+
+    markup.add(about_btn, name_meaning_btn, web_app_btn)
     bot.send_message(message.chat.id, "Привет! Выберите действие:", reply_markup=markup)
 
 # Обработка нажатия кнопки "О боте"
@@ -108,8 +113,15 @@ def process_delete_name(message):
     bot.send_message(message.chat.id, f"Имя '{name}' успешно удалено.")
 
 @bot.message_handler(content_types='web_app_data')
-async def buy_process(web_app_message): 
-    await bot.send_message(web_app_message.chat.id, DISC[f'{web_app_message.web_app_data}']) 
+def buy_process(web_app_message): 
+    DISC = {
+        "1":"Происхождение имени Руслан корнями уходит в героический иранский эпос о Рустаме, сыне Залазара (поэма «Шахнамэ» персидского поэта Фирдоуси). Тюркские народы воспели его уже как Арслана Зальзара, а затем в XVII веке у славянских народов он уже фигурирует как богатырь Еруслан Залазарович, или Лазаревич.",
+        "2": "Имя Антон имеет латинские корни, происходит от римского родового имени Antonius (Антониус, Антоний). Это очень древнее римское родовое имя, поэтому точное значение не известно.",
+        "3": "Имя Никита в переводе с греческого языка означает «победитель». В Западной Европе можно услышать и женский вариант этого имени, он идентичен мужскому звучанию – Никита. Женское имя Никита (с ударением на последний слог) появилось после известного фильма Люка Бессона «Никита» («Nikita», «La Femme Nikita»), где главная героиня взяла себе этот псевдоним.",
+        "4": "Имя Александра в переводе с греческого означает «мужественная», «защитница». Парное мужское имя – Александр. В русском, украинском и белорусском языках это имя имеет различные формы: Лександра, Ляксандра, Олекса, Алекса, Алеся, Олеся, Леся."
+    }
+    print(web_app_message)
+    bot.send_message(web_app_message.chat.id, DISC[f'{web_app_message.web_app_data.data}']) 
 
 # Запуск бота
 bot.polling(none_stop=True)

@@ -7,13 +7,15 @@ let item = "";
 
 let btn1 = document.getElementById("btn1"); 
 let btn2 = document.getElementById("btn2"); 
+let btn3 = document.getElementById("btn3");
+let btn4 = document.getElementById("btn4");
 
 btn1.addEventListener("click", function () {
 	 if (tg.MainButton.isVisible) {
 		 tg.MainButton.hide(); 
 	}
 	else { 
-		tg.MainButton.setText("Вывести информацию по овену"); 
+		tg.MainButton.setText("Вывести информацию по Руслану"); 
 		item = "1"; 
 		tg.MainButton.show(); 
 	}
@@ -23,10 +25,32 @@ btn2.addEventListener("click", function () {
 	if (tg.MainButton.isVisible) {
 		 tg.MainButton.hide(); }
 	else { 
-		tg.MainButton.setText("Вывести информацию по тельцу"); 
-		item = "2"; tg.MainButton.show(); 
+		tg.MainButton.setText("Вывести информацию по Антону"); 
+		item = "2"; 
+		tg.MainButton.show(); 
 	}
 });
+
+btn3.addEventListener("click", function () {
+	if (tg.MainButton.isVisible) {
+		 tg.MainButton.hide(); }
+	else { 
+		tg.MainButton.setText("Вывести информацию по Никите"); 
+		item = "3"; 
+		tg.MainButton.show(); 
+	}
+});
+
+btn4.addEventListener("click", function () {
+	if (tg.MainButton.isVisible) {
+		 tg.MainButton.hide(); }
+	else { 
+		tg.MainButton.setText("Вывести информацию по Александре"); 
+		item = "4"; 
+		tg.MainButton.show(); 
+	}
+});
+
 
 Telegram.WebApp.onEvent("mainButtonClicked", function () {
 	 tg.sendData(item); 

@@ -2,4 +2,6 @@
 /Include
 /Scripts
 /Lib
+/tests
 pyvenv*
+constants.py

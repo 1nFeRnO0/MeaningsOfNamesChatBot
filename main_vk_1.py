@@ -1,10 +1,9 @@
 import vk_api, json 
 from vk_api.longpoll import VkLongPoll, VkEventType 
 from vk_api.keyboard import VkKeyboard, VkKeyboardColor
+import constants
 
-main_token='vk1.a.07uxeaQ3ABpdvj-LhJ1nGAMS9K3Ye8flrrz2ZGBNV83EhhkyOGknJYgczRyGCHpX0plDH0ZZdMCLEr_M0-gO1HgtZFEO0Fga0fr57ZBNlZFkMiFOWmJlqa7BXIxQmnaZcfuODa03RnCDIJ4x4kN5z0tayohIDY0S8ui4XnddFpnXIV7gJKi4YDZVWFCdpz4wfiO8a6fFCbhXRwfTbX-CyQ' 
-
-vk_session = vk_api.VkApi(token = main_token) 
+vk_session = vk_api.VkApi(token = constants.VK_API_TOKEN) 
 Longpoll = VkLongPoll(vk_session) 
 
 def get_keyboard(buts): 
